@@ -10,7 +10,8 @@
 
 
 #include <iostream>
-#include <c++/functional>
+#include <functional>
+#include <string.h>
 
 class sudoku {
 

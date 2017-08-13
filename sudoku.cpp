@@ -29,10 +29,15 @@ void sudoku::solve(int (&problem)[N][N]) {
         || this->singleLocationInRow()
         || this->singleLocationInColumn()
         || this->singleLocationInBlock()
-            ){
+        // || this->isSolved()
+        ){
     }
 
+
     this->printSolution((int*)this->solution);
+    // this->printCandidates(8,8);
+    // this->printCandidates(8,7);
+    // this->printCandidates(8,5);
 }
 
 

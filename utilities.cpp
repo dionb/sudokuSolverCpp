@@ -11,7 +11,12 @@ void sudoku::printSolution(int*){
     cout << endl;
     for(int y = 0; y < N; y++) {
         for (int x = 0; x < N; x++) {
-            cout << " " << this->solution[y][x];
+            cout << " ";
+            if(this->solution[y][x] == 0){
+                cout << ".";
+            }else{
+                cout << this->solution[y][x];
+            }
             if(x % 3 == 2){
                 cout << "  ";
             }
@@ -70,8 +75,25 @@ void sudoku::makeMove(string rule, int y, int x, int c){
     cout << rule;
     printf(" set %i,%i to %i\n", y, x, c);
     this->solution[y][x] = c;
+    //remove other candidates from same cell
     for(int i = 0; i < N; i++){
         this->candidates[y][x][i] = false;
+    }
+    //remove c from other cells in row
+    for(int i = 0; i < N; i++){
+        this->candidates[y][i][c-1] = false;
+    }
+    // remove c from other cells in column
+    for(int i = 0; i < N; i++){
+        this->candidates[i][x][c-1] = false;
+    }
+    int celly = (y/3)*3;
+    int cellx = (x/3)*3;
+    for(int y = 0; y < 3; y++){
+        for(int x = 0; x < 3; x++){
+            // cout << "clearing " << c << " from " << celly+y << cellx+x << "\n";
+            this->candidates[celly+y][cellx+x][c-1] = false;
+        }
     }
 }
 
